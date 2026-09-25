@@ -1,0 +1,49 @@
+[
+ {
+  "epoch": 0,
+  "validation": {
+   "command": 0.1625,
+   "weapon": 0.0
+  }
+ },
+ {
+  "epoch": 1,
+  "validation": {
+   "command": 0.6375,
+   "weapon": 1.0
+  },
+  "seconds": 101.2
+ },
+ {
+  "epoch": 2,
+  "validation": {
+   "command": 0.75,
+   "weapon": 1.0
+  },
+  "seconds": 100.6
+ },
+ {
+  "epoch": 3,
+  "validation": {
+   "command": 0.75,
+   "weapon": 1.0
+  },
+  "seconds": 100.7
+ },
+ {
+  "epoch": 4,
+  "validation": {
+   "command": 0.85,
+   "weapon": 1.0
+  },
+  "seconds": 100.8
+ },
+ {
+  "epoch": 5,
+  "validation": {
+   "command": 0.8875,
+   "weapon": 1.0
+  },
+  "seconds": 100.8
+ }
+]

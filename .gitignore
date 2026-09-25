@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+runs/
+*.gguf
+*.safetensors
+*.mp4

@@ -1,0 +1,33 @@
+[
+ {
+  "epoch": 0,
+  "validation": {
+   "command": 0.5125,
+   "weapon": 0.76
+  }
+ },
+ {
+  "epoch": 1,
+  "validation": {
+   "command": 0.7875,
+   "weapon": 1.0
+  },
+  "seconds": 550.1
+ },
+ {
+  "epoch": 2,
+  "validation": {
+   "command": 0.95,
+   "weapon": 1.0
+  },
+  "seconds": 549.8
+ },
+ {
+  "epoch": 3,
+  "validation": {
+   "command": 0.9375,
+   "weapon": 1.0
+  },
+  "seconds": 550.1
+ }
+]

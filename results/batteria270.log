@@ -1,0 +1,23 @@
+=== g270 a freddo
+command  13/80 = 0.163   confidenza: giuste 0.68, sbagliate 0.71
+weapon   1/50 = 0.020   confidenza: giuste 0.55, sbagliate 0.81
+latenza p50 72 ms   errori piu' frequenti (giusta -> scelta): [(('shotgun', 'melee'), 25), (('shoot', 'collect'), 24), (('pistol', 'melee'), 24), (('collect', 'collect'), 20), (('exit', 'collect'), 16)]
+g270-freddo  grezzo: acc=0.108 nll=2.528 brier=1.230 ece=0.645
+             tarato: acc=0.108 nll=1.672 brier=0.805 ece=0.247   T=5.35/8.60
+=== g270 + LoRA
+command  71/80 = 0.887   confidenza: giuste 0.99, sbagliate 0.84
+weapon   50/50 = 1.000   confidenza: giuste 1.00, sbagliate nan
+latenza p50 45 ms   errori piu' frequenti (giusta -> scelta): [(('exit', 'collect'), 4), (('open', 'exit'), 3), (('exit', 'open'), 1), (('collect', 'collect'), 1)]
+g270-doom    grezzo: acc=0.931 nll=0.244 brier=0.108 ece=0.054
+             tarato: acc=0.931 nll=0.248 brier=0.109 ece=0.068   T=1.50/1.05
+g270-doom    n=1416 p50=70.9 p90=88.3 p99=113.0 ms  media=75.5  decisioni/s=13.2
+{"tag": "g270-doom", "seed": 48, "mappa": "MAP01", "uscita": null, "kills": 5, "morti": 0, "lat": 76.5, "raccolti": 8, "porte": 1, "run": "runs/20260925_112235_274652_g270-doom-s48"}
+{"tag": "g270-doom", "seed": 49, "mappa": "MAP01", "uscita": null, "kills": 9, "morti": 0, "lat": 77.17, "raccolti": 11, "porte": 2, "run": "runs/20260925_112536_050712_g270-doom-s49"}
+{"tag": "g270-doom", "seed": 50, "mappa": "MAP01", "uscita": 62.8, "kills": 11, "morti": 0, "lat": 81.88, "raccolti": 11, "porte": 3, "run": "runs/20260925_112836_816551_g270-doom-s50"}
+{"tag": "g270-doom", "seed": 51, "mappa": "MAP01", "uscita": 74.114, "kills": 14, "morti": 0, "lat": 71.93, "raccolti": 17, "porte": 3, "run": "runs/20260925_112943_402447_g270-doom-s51"}
+{"tag": "g270-doom", "seed": 52, "mappa": "MAP01", "uscita": null, "kills": 10, "morti": 0, "lat": 76.95, "raccolti": 17, "porte": 2, "run": "runs/20260925_113101_309809_g270-doom-s52"}
+{"tag": "g270-doom", "seed": 53, "mappa": "MAP01", "uscita": null, "kills": 9, "morti": 0, "lat": 77.02, "raccolti": 14, "porte": 2, "run": "runs/20260925_113402_082913_g270-doom-s53"}
+{"tag": "g270-doom", "seed": 48, "mappa": "MAP02", "uscita": null, "kills": 47, "morti": 4, "lat": 76.24, "raccolti": 9, "porte": 5, "run": "runs/20260925_113702_857854_g270-doom-s48"}
+{"tag": "g270-doom", "seed": 49, "mappa": "MAP02", "uscita": null, "kills": 18, "morti": 1, "lat": 84.27, "raccolti": 6, "porte": 0, "run": "runs/20260925_114203_632618_g270-doom-s49"}
+{"tag": "g270-doom", "seed": 50, "mappa": "MAP02", "uscita": null, "kills": 15, "morti": 1, "lat": 73.08, "raccolti": 5, "porte": 0, "run": "runs/20260925_114730_946850_g270-doom-s50"}
+FINE

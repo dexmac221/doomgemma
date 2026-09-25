@@ -1,0 +1,31 @@
+diff --git a/agent.py b/agent.py
+index 242f955..83a837d 100644
+--- a/agent.py
++++ b/agent.py
+@@ -292,7 +292,7 @@ def main():
+     parser.add_argument('--dry', action='store_true')
+     parser.add_argument('--realtime', type=int, choices=[0, 1], default=1)
+     parser.add_argument('--tag', default='')
+-    parser.add_argument('--model', choices=['english', 'multilingual', 'typed-decisions', 'doom-adapted', 'jev'], default='typed-decisions')
++    parser.add_argument('--model', choices=['english', 'multilingual', 'typed-decisions', 'doom-adapted', 'jev', 'llm', 'oracolo'], default='typed-decisions')
+     parser.add_argument('--endpoint', default='http://127.0.0.1:8000/predict')
+     parser.add_argument('--interval', type=float, default=.5, help='Минимальный интервал запросов, секунды')
+     args = parser.parse_args()
+@@ -308,6 +308,9 @@ def main():
+     run = ROOT / 'runs' / (datetime.now().strftime('%Y%m%d_%H%M%S_%f') + ('_' + tag if tag else ''))
+     run.mkdir(parents=True)
+     client = JevClient() if args.model=='jev' else LayaClient(args.endpoint, args.model)
++    if args.model=='oracolo':   # l'insegnante a regole di build_dataset.py come giocatore
++        import copy as _copy, oracolo as _oracolo
++        client.health = lambda: {'status':'ok','models':{'oracolo':'regole build_dataset.gold'}}
+     health = {'status': 'dry', 'models': {}}
+     # Health проверяется до старта игры: не превращаем ошибку сервера в эвристический прогон.
+     if not args.dry:
+@@ -458,6 +461,7 @@ def main():
+                             'choice':'wait','probabilities':{k:float(k=='wait') for k in packet['commands']},
+                             'danger':0,'latency_ms':0,'tokens':0,'routing':{'model':'dry'}}
+                     accept(result,tick)
++                elif args.model=='oracolo':future=pool.submit(_oracolo.decidi,client,packet,_copy.deepcopy(s))
+                 else:future=pool.submit(client.predict,text,packet['questions'])
+             action,refs=controller.act(s,tick)
+             tactic=s['execution']['action']
