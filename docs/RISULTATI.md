@@ -1,6 +1,6 @@
 # doomLaya contro doomGemma — risultati per l'articolo
 
-*Misure del 25 settembre 2026 su soft-2 (laboratorio di dexmac). Documento di lavoro: tutti i numeri vengono dai file in `results/`, prodotti dagli script in `src/`.*
+*Misure del 25 settembre 2026 su soft-2 (laboratorio di dexmac). Documento di lavoro: tutti i numeri vengono dai file in `results/`, prodotti dagli script in `src/`. English version: [RESULTS.md](RESULTS.md).*
 
 ## In una riga
 
@@ -55,7 +55,7 @@ Non risulta pubblicato un confronto con **gli stessi dati di Laya v3, una LoRA s
 | modello | parametri addestrati | tempo per epoca (4070) | epoca migliore | adattatore |
 |---|---|---|---|---|
 | Gemma 4 E2B (5,1 miliardi totali, circa 2 "effettivi") | 24,2M | 550 s | 2 di 3 | 97 MB |
-| Gemma 3 270M (268M) | 3,8M | 101 s | 5 di 5 | — |
+| Gemma 3 270M (268M) | 3,8M | 101 s | 5 di 5 | 15 MB |
 
 - **Messa in uso**: fusione della LoRA, conversione in GGUF, Q8_0. doomGemma E2B pesa 4,9 GB e doom-270M 292 MB.
 - **Laya v3** è quello pubblicato da azalio: 3 fasi, addestrando la testa e poi gli ultimi 3 strati dell'encoder. Non l'abbiamo riaddestrato.

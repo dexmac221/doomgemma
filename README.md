@@ -33,7 +33,7 @@ measured.
 | Laya base / typed-decisions, zero-shot | 0.41 / 0.58 · 0.40 / 0.60 | 0/1 · 0/1 | — | 24 ms (base) |
 
 Main findings (details, calibration, "rails" and all caveats in
-[docs/RISULTATI.md](docs/RISULTATI.md), in Italian):
+[docs/RESULTS.md](docs/RESULTS.md); Italian version in [docs/RISULTATI.md](docs/RISULTATI.md)):
 
 1. **Task training matters more than architecture.** Zero-shot, Gemma E2B already beats
    both Laya checkpoints; after LoRA on the same data it matches Laya v3 in play and beats
@@ -71,7 +71,7 @@ Main findings (details, calibration, "rails" and all caveats in
 | `src/semi.sh`, `src/gioca.sh`, `src/binari.py`, `src/confronta.py` | games over seeds/maps, executor-rejection share, decision patterns |
 | `src/verifica_porta.py` | reads `freedoom2.wad` and identifies the MAP02 door |
 | `results/` | raw results (JSON / JSONL) and training histories |
-| `docs/RISULTATI.md` | full write-up: method, all tables, limitations, prior work |
+| `docs/RESULTS.md` | full write-up: method, all tables, limitations, prior work (Italian: `docs/RISULTATI.md`) |
 
 Script comments and result keys are in Italian (*uscita* = exit, *morti* = deaths,
 *freddo* = zero-shot, *raccolti* = items picked up).
@@ -104,7 +104,7 @@ chain. The validation set is small (130 questions). Labels come from a rule-base
 not from human play. Laya v3 was trained by its authors with a different recipe and was
 not re-tuned here. Jev numbers are quoted from doomLaya and not reproduced. The Gemma 3
 270M base was taken from the `unsloth/gemma-3-270m-it` mirror because Google's repository
-is gated. See `docs/RISULTATI.md` §7 for the full list.
+is gated. See `docs/RESULTS.md` §7 for the full list.
 
 ## Credits and licences
 
