@@ -1,23 +1,23 @@
 {
- "modello": "e2b-doom",
- "n": 130,
- "grezzo": {
+ "model": "gemma4-e2b-lora",
+ "n_questions": 130,
+ "raw": {
   "acc": 0.9769230769230769,
   "nll": 0.10095694193786019,
   "brier": 0.049543641534956696,
   "ece": 0.04312441753392271
  },
- "tarato_cv2": {
+ "tuned_cv2": {
   "acc": 0.976923076923077,
   "nll": 0.0787438762231861,
   "brier": 0.043866339839902825,
   "ece": 0.02826450617516501
  },
- "T": [
+ "temperature_per_fold": [
   0.55,
   0.6000000000000001
  ],
- "per_domanda": {
+ "per_question": {
   "command": {
    "acc": 0.9625,
    "nll": 0.1638987810471535,
@@ -30,5 +30,6 @@
    "brier": 8.99764168004383e-08,
    "ece": 0.0002499668656371057
   }
- }
+ },
+ "note": "temperature fitted by 2-fold cross-validation on the 130 validation questions"
 }

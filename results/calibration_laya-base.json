@@ -1,23 +1,23 @@
 {
- "modello": "laya-base",
- "n": 130,
- "grezzo": {
+ "model": "laya-base",
+ "n_questions": 130,
+ "raw": {
   "acc": 0.47692307692307695,
   "nll": 1.3836014619682062,
   "brier": 0.649897811667404,
   "ece": 0.08504758673358692
  },
- "tarato_cv2": {
+ "tuned_cv2": {
   "acc": 0.47692307692307695,
   "nll": 1.393119606749527,
   "brier": 0.6605174522309741,
   "ece": 0.11885476575806478
  },
- "T": [
+ "temperature_per_fold": [
   1.05,
   1.5
  ],
- "per_domanda": {
+ "per_question": {
   "command": {
    "acc": 0.4125,
    "nll": 1.6230769546911934,
@@ -30,5 +30,6 @@
    "brier": 0.5769648028330564,
    "ece": 0.17086303615841034
   }
- }
+ },
+ "note": "temperature fitted by 2-fold cross-validation on the 130 validation questions"
 }

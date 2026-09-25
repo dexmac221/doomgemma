@@ -1,0 +1,11 @@
+{
+ "model": "gemma4-e2b-zeroshot",
+ "gpu": "RTX 4070",
+ "setup": "HTTP /predict (Laya server, or serve_llm.py + llama.cpp Q8_0)",
+ "packets_measured": 1416,
+ "p50_ms": 58.909535997372586,
+ "p90_ms": 108.37582900421694,
+ "p99_ms": 117.24906699964777,
+ "mean_ms": 70.75690291100527,
+ "decisions_per_s": 14.102187800260694
+}

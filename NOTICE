@@ -7,7 +7,7 @@ License 2.0 (see LICENSE).
 It builds on third-party work:
 
 - doomLaya (https://github.com/azalio/doomLaya), Apache License 2.0.
-  patches/doomLaya-agent.patch modifies doomLaya's agent.py; src/oracolo.py
+  patches/doomLaya-agent.patch modifies doomLaya's agent.py; src/oracle.py
   reproduces verbatim the `gold` labelling function of doomLaya's
   training/build_dataset.py. The training and validation data used for the LoRA
   adapters are doomLaya's training/v3 files. See doomLaya's own NOTICE.

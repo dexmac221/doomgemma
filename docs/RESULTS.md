@@ -1,6 +1,6 @@
 # doomLaya vs doomGemma — results
 
-*Measurements of 25 September 2026 on soft-2 (dexmac's lab). Working document: every number comes from the files in `results/`, produced by the scripts in `src/`. Italian version: [RISULTATI.md](RISULTATI.md).*
+*Measurements of 25 September 2026 on soft-2 (dexmac's lab). Working document: every number comes from the files in `results/`, produced by the scripts in `src/`.*
 
 ## In short
 
@@ -81,7 +81,7 @@ Gemma E2B **without training already beats Laya without training**, and this hol
 
 ### 5.2 Calibration (130 questions)
 
-15-bin ECE on the maximum confidence and multi-class Brier. The temperature is estimated with **2-fold cross-validation on the validation set**, so no number is measured on the data it was fitted on (`calibra.py`).
+15-bin ECE on the maximum confidence and multi-class Brier. The temperature is estimated with **2-fold cross-validation on the validation set**, so no number is measured on the data it was fitted on (`calibrate.py`).
 
 | model | raw ECE | tuned ECE | raw Brier | tuned Brier | estimated T |
 |---|---|---|---|---|---|
@@ -100,7 +100,7 @@ Gemma E2B **without training already beats Laya without training**, and this hol
 
 ### 5.3 Latency on equal hardware (RTX 4070)
 
-The same **1,416 game packets** (state plus the two real questions) are replayed in sequence. End-to-end time is measured, with 10 warm-up requests (`latenza.py`, `latenza_diretta.py`).
+The same **1,416 game packets** (state plus the two real questions) are replayed in sequence. End-to-end time is measured, with 10 warm-up requests (`latency.py`, `latency_direct.py`).
 
 | model and serving method | p50 | p90 | p99 | decisions/s |
 |---|---|---|---|---|
@@ -150,7 +150,7 @@ Zero-shot models have a **fixation on picking up items**: Gemma E2B chose "pick 
 
 **A tie in play between Laya v3 and doomGemma.** Laya is more variable, doomGemma more consistent. The 56.6 vs 71.0 of seed 48 was partly luck.
 
-**The rule-based teacher as a reference.** The oracle is the `gold` function of `training/build_dataset.py`, copied verbatim, which receives the same packet and the same raw state the labels were produced from and goes through the same executor at the same cadence (`oracolo.py`). It exits 6 times out of 6, in 81.6 s on average. The oracle **does not optimise time-to-exit**: its rules include picking up useful items, and indeed it picks up more (17.7 on average, up to 31) and kills more (16.0 vs about 13). **The models exit earlier than the teacher (about 60 s vs 82) because they imitate it imperfectly and pick up less.** It is a consequence of imperfect imitation, not a merit of the models. On time-to-exit alone, therefore, 60 s is not the ceiling of the bench.
+**The rule-based teacher as a reference.** The oracle is the `gold` function of `training/build_dataset.py`, copied verbatim, which receives the same packet and the same raw state the labels were produced from and goes through the same executor at the same cadence (`oracle.py`). It exits 6 times out of 6, in 81.6 s on average. The oracle **does not optimise time-to-exit**: its rules include picking up useful items, and indeed it picks up more (17.7 on average, up to 31) and kills more (16.0 vs about 13). **The models exit earlier than the teacher (about 60 s vs 82) because they imitate it imperfectly and pick up less.** It is a consequence of imperfect imitation, not a merit of the models. On time-to-exit alone, therefore, 60 s is not the ceiling of the bench.
 
 ### 5.5 In play: MAP02, an unseen map (seeds 48–50, 300 s limit)
 
@@ -172,7 +172,7 @@ On MAP02 **the whole chain fails** (rules, executor, state representation), not 
 
 ### 5.6 How often the executor rejects commands ("rails")
 
-The share of time in which the executor **cannot** execute the model's command: path blocked or target unreachable (`binari.py`, from the telemetry).
+The share of time in which the executor **cannot** execute the model's command: path blocked or target unreachable (`rails.py`, from the telemetry).
 
 | player | MAP01 | MAP02 |
 |---|---|---|
@@ -213,5 +213,5 @@ This explains doom-270M: **it has high validation accuracy (0.93) but keeps choo
 
 - `media/doomLaya_vs_doomGemma.gif`: 5 s side by side, MAP01 seed 48, seconds 4.5–9.5, with the probability panel.
 - `results/`: raw results (calibration, latency, MAP01/MAP02 games, oracle, Laya base, training history).
-- `src/`: all scripts; `patches/doomLaya-agent.patch`: the 6 lines changed in doomLaya's `agent.py` (5 added, 1 modified) (`--model llm` and `--model oracolo`).
+- `src/`: all scripts; `patches/doomLaya-agent.patch`: the 6 lines changed in doomLaya's `agent.py` (5 added, 1 modified) (`--model llm` and `--model oracle`).
 - LoRA adapters on Hugging Face: [dexmac/doomgemma-e2b-lora](https://huggingface.co/dexmac/doomgemma-e2b-lora) and [dexmac/doom-gemma3-270m-lora](https://huggingface.co/dexmac/doom-gemma3-270m-lora).

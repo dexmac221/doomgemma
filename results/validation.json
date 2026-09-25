@@ -1,0 +1,45 @@
+{
+ "questions": {
+  "command": 80,
+  "weapon": 50,
+  "total": 130
+ },
+ "source": "doomLaya training/v3/validation.json",
+ "accuracy": {
+  "gemma4-e2b-lora": {
+   "command_accuracy": 0.9625,
+   "weapon_accuracy": 1.0,
+   "total_accuracy": 0.9769
+  },
+  "gemma4-e2b-zeroshot": {
+   "command_accuracy": 0.5125,
+   "weapon_accuracy": 0.78,
+   "total_accuracy": 0.6154
+  },
+  "gemma3-270m-lora": {
+   "command_accuracy": 0.8875,
+   "weapon_accuracy": 1.0,
+   "total_accuracy": 0.9308
+  },
+  "gemma3-270m-zeroshot": {
+   "command_accuracy": 0.1625,
+   "weapon_accuracy": 0.02,
+   "total_accuracy": 0.1077
+  },
+  "laya-base": {
+   "command_accuracy": 0.4125,
+   "weapon_accuracy": 0.58,
+   "total_accuracy": 0.4769
+  },
+  "laya-typed-decisions": {
+   "command_accuracy": 0.4,
+   "weapon_accuracy": 0.6,
+   "total_accuracy": 0.4769
+  },
+  "laya-v3": {
+   "command_accuracy": 0.725,
+   "weapon_accuracy": 0.98,
+   "total_accuracy": 0.8231
+  }
+ }
+}

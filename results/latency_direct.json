@@ -1,0 +1,18 @@
+[
+ {
+  "model": "gemma3-270m-lora",
+  "setup": "direct PyTorch, bf16, one pass, 2 questions batched",
+  "p50_ms": 22.2,
+  "p90_ms": 22.8,
+  "p99_ms": 23.9,
+  "decisions_per_s": 44.7
+ },
+ {
+  "model": "gemma4-e2b-lora",
+  "setup": "direct PyTorch, bf16, one pass, 2 questions batched",
+  "p50_ms": 83.7,
+  "p90_ms": 86.7,
+  "p99_ms": 100.2,
+  "decisions_per_s": 12.0
+ }
+]

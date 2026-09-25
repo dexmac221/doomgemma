@@ -1,0 +1,11 @@
+{
+ "model": "laya-v3",
+ "gpu": "RTX 4070",
+ "setup": "HTTP /predict (Laya server, or serve_llm.py + llama.cpp Q8_0)",
+ "packets_measured": 1416,
+ "p50_ms": 22.94465000159107,
+ "p90_ms": 23.989470006199554,
+ "p99_ms": 25.251692997699138,
+ "mean_ms": 23.154235099575942,
+ "decisions_per_s": 41.82948223681315
+}

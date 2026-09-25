@@ -1,23 +1,23 @@
 {
- "modello": "g270-doom",
- "n": 130,
- "grezzo": {
+ "model": "gemma3-270m-lora",
+ "n_questions": 130,
+ "raw": {
   "acc": 0.9307692307692308,
   "nll": 0.2440589717079693,
   "brier": 0.10821935401324977,
   "ece": 0.05432062686591799
  },
- "tarato_cv2": {
+ "tuned_cv2": {
   "acc": 0.9307692307692308,
   "nll": 0.2484164700069051,
   "brier": 0.10922551994354321,
   "ece": 0.06831492281003158
  },
- "T": [
+ "temperature_per_fold": [
   1.5,
   1.05
  ],
- "per_domanda": {
+ "per_question": {
   "command": {
    "acc": 0.8875,
    "nll": 0.39642073276390727,
@@ -30,5 +30,6 @@
    "brier": 1.1728246099344513e-07,
    "ece": 0.0002801123687949314
   }
- }
+ },
+ "note": "temperature fitted by 2-fold cross-validation on the 130 validation questions"
 }

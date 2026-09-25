@@ -1,23 +1,23 @@
 {
- "modello": "e2b-freddo",
- "n": 130,
- "grezzo": {
+ "model": "gemma4-e2b-zeroshot",
+ "n_questions": 130,
+ "raw": {
   "acc": 0.6153846153846154,
   "nll": 3.270883441878046,
   "brier": 0.764881230956287,
   "ece": 0.37725026881911317
  },
- "tarato_cv2": {
+ "tuned_cv2": {
   "acc": 0.6153846153846154,
   "nll": 1.2732901184296688,
   "brier": 0.5960792293180763,
   "ece": 0.21793338458249045
  },
- "T": [
+ "temperature_per_fold": [
   4.25,
   4.6000000000000005
  ],
- "per_domanda": {
+ "per_question": {
   "command": {
    "acc": 0.5125,
    "nll": 4.404519478138868,
@@ -30,5 +30,6 @@
    "brier": 0.43114547397728326,
    "ece": 0.20682030631661263
   }
- }
+ },
+ "note": "temperature fitted by 2-fold cross-validation on the 130 validation questions"
 }

@@ -1,23 +1,23 @@
 {
- "modello": "g270-freddo",
- "n": 130,
- "grezzo": {
+ "model": "gemma3-270m-zeroshot",
+ "n_questions": 130,
+ "raw": {
   "acc": 0.1076923076923077,
   "nll": 2.5280237574375244,
   "brier": 1.2302524147395988,
   "ece": 0.6452566351420654
  },
- "tarato_cv2": {
+ "tuned_cv2": {
   "acc": 0.1076923076923077,
   "nll": 1.6715607881299177,
   "brier": 0.8046502007237146,
   "ece": 0.24725689870784023
  },
- "T": [
+ "temperature_per_fold": [
   5.3500000000000005,
   8.6
  ],
- "per_domanda": {
+ "per_question": {
   "command": {
    "acc": 0.1625,
    "nll": 2.3440215911390343,
@@ -30,5 +30,6 @@
    "brier": 1.3818863900120633,
    "ece": 0.7627846427881821
   }
- }
+ },
+ "note": "temperature fitted by 2-fold cross-validation on the 130 validation questions"
 }

@@ -1,0 +1,11 @@
+{
+ "model": "gemma3-270m-lora",
+ "gpu": "RTX 4070",
+ "setup": "HTTP /predict (Laya server, or serve_llm.py + llama.cpp Q8_0)",
+ "packets_measured": 1416,
+ "p50_ms": 70.94838100601919,
+ "p90_ms": 88.29737600171939,
+ "p99_ms": 112.95869299647165,
+ "mean_ms": 75.54961400917223,
+ "decisions_per_s": 13.234985767046304
+}

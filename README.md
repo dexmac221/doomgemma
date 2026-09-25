@@ -33,7 +33,7 @@ measured.
 | Laya base / typed-decisions, zero-shot | 0.41 / 0.58 · 0.40 / 0.60 | 0/1 · 0/1 | — | 24 ms (base) |
 
 Main findings (details, calibration, "rails" and all caveats in
-[docs/RESULTS.md](docs/RESULTS.md); Italian version in [docs/RISULTATI.md](docs/RISULTATI.md)):
+[docs/RESULTS.md](docs/RESULTS.md)):
 
 1. **Task training matters more than architecture.** Zero-shot, Gemma E2B already beats
    both Laya checkpoints; after LoRA on the same data it matches Laya v3 in play and beats
@@ -50,7 +50,7 @@ Main findings (details, calibration, "rails" and all caveats in
    imperfectly and pick up fewer items; the teacher does not optimise time-to-exit.
 6. **Generalisation is not measurable here.** On MAP02 nobody exits, teacher included: the
    chain stops at a **yellow-key door** (sector 37, linedef special 27, verified in the
-   WAD with `src/verifica_porta.py`) that doomLaya offers as openable while the key is far
+   WAD with `src/check_door.py`) that doomLaya offers as openable while the key is far
    and out of sight.
 
 ## Models
@@ -62,19 +62,16 @@ Main findings (details, calibration, "rails" and all caveats in
 
 | path | content |
 |---|---|
-| `patches/doomLaya-agent.patch` | 6 lines changed in doomLaya's `agent.py` (5 added, 1 modified): `--model llm` (any llama.cpp model through `src/serve_llm.py`) and `--model oracolo` (the rule-based teacher as player) |
+| `patches/doomLaya-agent.patch` | 6 lines changed in doomLaya's `agent.py` (5 added, 1 modified): `--model llm` (any llama.cpp model through `src/serve_llm.py`) and `--model oracle` (the rule-based teacher as player) |
 | `src/serve_llm.py` | bridge with Laya's `/predict` API: options → letters, grammar-constrained single token, probabilities from `top_logprobs` |
-| `src/oracolo.py` | the labelling rules (`gold`, copied verbatim from doomLaya's `training/build_dataset.py`) as a player |
-| `src/lora_train.py`, `src/lora_fondi.py` | LoRA training (loss on the answer letter only) and merge for GGUF conversion |
-| `src/valuta.py`, `src/calibra.py` | accuracy and calibration (ECE, Brier, 2-fold temperature scaling) on the 130 validation questions |
-| `src/latenza.py`, `src/latenza_diretta.py` | latency on replayed game packets: through a server, and direct PyTorch scoring |
-| `src/semi.sh`, `src/gioca.sh`, `src/binari.py`, `src/confronta.py` | games over seeds/maps, executor-rejection share, decision patterns |
-| `src/verifica_porta.py` | reads `freedoom2.wad` and identifies the MAP02 door |
-| `results/` | raw results (JSON / JSONL) and training histories |
-| `docs/RESULTS.md` | full write-up: method, all tables, limitations, prior work (Italian: `docs/RISULTATI.md`) |
-
-Script comments and result keys are in Italian (*uscita* = exit, *morti* = deaths,
-*freddo* = zero-shot, *raccolti* = items picked up).
+| `src/oracle.py` | the labelling rules (`gold`, copied verbatim from doomLaya's `training/build_dataset.py`) as a player |
+| `src/lora_train.py`, `src/lora_merge.py` | LoRA training (loss on the answer letter only) and merge for GGUF conversion |
+| `src/evaluate.py`, `src/calibrate.py` | accuracy and calibration (ECE, Brier, 2-fold temperature scaling) on the 130 validation questions |
+| `src/latency.py`, `src/latency_direct.py` | latency on replayed game packets: through a server, and direct PyTorch scoring |
+| `src/play_seeds.sh`, `src/rails.py`, `src/decision_patterns.py` | games over seeds/maps, executor-rejection share, decision patterns |
+| `src/check_door.py` | reads `freedoom2.wad` and identifies the MAP02 door |
+| `results/` | `games_map01.jsonl` / `games_map02.jsonl` (all 47 games), `validation.json`, `calibration_*.json`, `latency_*.json`, training histories |
+| `docs/RESULTS.md` | full write-up: method, all tables, limitations, prior work |
 
 ## Reproducing
 
@@ -85,14 +82,15 @@ git apply /path/to/doomgemma/patches/doomLaya-agent.patch
 cp /path/to/doomgemma/src/* .
 # set up doomLaya's environment as in its README, then e.g.:
 llama-server -m doomgemma-e2b-Q8_0.gguf -ngl 999 -fa on -np 2 -c 8192 --jinja --port 8090 &
-python serve_llm.py --llm http://127.0.0.1:8090 --name e2b-doom --port 8002 --separate &
-python valuta.py http://127.0.0.1:8002/predict llm
-MAPPA=MAP01 SECONDI=180 bash semi.sh llm http://127.0.0.1:8002/predict e2b-doom 48 49 50 51 52 53
-MAPPA=MAP02 SECONDI=300 bash semi.sh oracolo http://127.0.0.1:9/predict oracolo 48 49 50
+python serve_llm.py --llm http://127.0.0.1:8090 --name gemma4-e2b-lora --port 8002 --separate &
+python evaluate.py http://127.0.0.1:8002/predict llm
+python calibrate.py http://127.0.0.1:8002/predict llm gemma4-e2b-lora
+MAP=MAP01 GAME_SECONDS=180 bash play_seeds.sh llm http://127.0.0.1:8002/predict gemma4-e2b-lora 48 49 50 51 52 53
+MAP=MAP02 GAME_SECONDS=300 bash play_seeds.sh oracle http://127.0.0.1:9/predict oracle 48 49 50
 ```
 
 To build the GGUF from the adapter: merge it into the base model with
-`src/lora_fondi.py`, then `convert_hf_to_gguf.py` and `llama-quantize … Q8_0` from llama.cpp.
+`src/lora_merge.py`, then `convert_hf_to_gguf.py` and `llama-quantize … Q8_0` from llama.cpp.
 
 Environment used: Ryzen 5 5600X, RTX 4070 12 GB + RTX 2070 SUPER 8 GB, Ubuntu 24.04,
 ViZDoom 1.3.1, torch 2.14 (CUDA 13.0), transformers 5.17, peft 0.21, llama.cpp `7077abbe1`.
