@@ -1,5 +1,11 @@
 # doomGemma — Laya vs Gemma on Doom: tests of the Laya "System One" decision model against fine-tuned LLMs
 
+> **Follow-up paper:** *System Switch: When Should a Fast Decision Model Stop and Think?*
+> ([arXiv:2610.09683](https://arxiv.org/abs/2610.09683)) builds on these tests: a fast decision model
+> plays and hands over to a reasoning vision LLM when a gate opens. Its code, prompts and data are in
+> **[dexmac221/system-switch](https://github.com/dexmac221/system-switch)**. The arXiv entry mentions a
+> `system-switch` branch of this repository: that code now lives in the repository above.
+
 > **This repository contains the full test suite for Laya** (Laya v3 for Doom, Laya base and Laya typed-decisions) **and for Gemma** (4 E2B and 3 270M, zero-shot and with LoRA), all run in the doomLaya FreeDoom agent: validation accuracy, calibration, latency on the same GPU, games on MAP01 and MAP02, and the rule-based teacher as a reference player.
 
 **Can a small generative LLM, fine-tuned with LoRA on exactly the same data, match a
